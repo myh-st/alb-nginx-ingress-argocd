@@ -7,10 +7,9 @@ This repository contains the necessary Kubernetes manifests to set up an EKS clu
 
 ```
 my-eks-project/
-├── deployments/
+├── manifests/
 │   ├── sample-app-deployment.yaml
 │   └── sample-app-service.yaml
-├── ingress/
 │   ├── alb-ingress.yaml
 │   └── nginx-ingress.yaml
 ├── argocd/
@@ -91,8 +90,8 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
 1. **Apply Deployment and Service Manifests**
 
 ```sh
-kubectl apply -f deployments/sample-app-deployment.yaml
-kubectl apply -f deployments/sample-app-service.yaml
+kubectl apply -f manifests/sample-app-deployment.yaml
+kubectl apply -f manifests/sample-app-service.yaml
 ```
 
 2. **Apply Ingress Resources**
@@ -100,13 +99,13 @@ kubectl apply -f deployments/sample-app-service.yaml
 For ALB:
 
 ```sh
-kubectl apply -f ingress/alb-ingress.yaml
+kubectl apply -f manifests/alb-ingress.yaml
 ```
 
 For NGINX:
 
 ```sh
-kubectl apply -f ingress/nginx-ingress.yaml
+kubectl apply -f manifests/nginx-ingress.yaml
 ```
 
 ### Step 5: Install ArgoCD
@@ -143,4 +142,3 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ## Conclusion
 
 You have now set up an EKS cluster with both ALB and NGINX ingress controllers, deployed a sample application, and connected it to ArgoCD for continuous deployment. You can access your application using the default AWS-provided DNS names for the load balancers created by the ingress controllers.
-```
